@@ -1,49 +1,20 @@
 import { apiRequest } from './apiClient';
 
-export function getExams(){
-    return apiRequest({
-        url: '/exams',
-        method: 'GET'
-    });
+export function getExams() {
+  return apiRequest('/exams', 'GET');
 }
-export function getExamById(id){
-    return apiRequest({
-        url: `/exams/${id}`,
-        method: 'GET'
-    });
+export function getExamById(id) {
+  return apiRequest(`/exams/${id}`, 'GET');
 }
-export function createExam(course_id, name, start_date, end_date){
-    return apiRequest({
-        url: '/exams',
-        method: 'POST',
-        data: {
-            course_id,
-            name,
-            start_date,
-            end_date
-        }
-    });
+export function createExam(course_id, name, start_date, end_date) {
+  return apiRequest('/exams', 'POST', { course_id, name, start_date, end_date });
 }
-export function updateExam(id, name, start_date, end_date){
-    return apiRequest({
-        url: `/exams/${id}`,
-        method: 'PUT',
-        data: {
-            name,
-            start_date,
-            end_date
-        }
-    });
+export function updateExam(id, name, start_date, end_date) {
+  return apiRequest(`/exams/${id}`, 'PUT', { name, start_date, end_date });
 }
-export function deleteExam(id){
-    return apiRequest({
-        url: `/exams/${id}`,
-        method: 'DELETE'
-    });
+export function deleteExam(id) {
+  return apiRequest(`/exams/${id}`, 'DELETE');
 }
-export function getExamResults(exam_id){
-    return apiRequest({
-        url: `/exams/${exam_id}/results`,
-        method: 'GET'
-    });
+export function getExamResults(exam_id) {
+  return apiRequest(`/exams/${exam_id}/results`, 'GET');
 }
