@@ -33,6 +33,5 @@ The application is available at http://localhost:5173
 ## Cypress Tests
 
 ```bash
-npm run cypress:open   # interactive mode
-npm run cypress:run    # command line mode (CI)
+npm cypress run
 ```
