@@ -129,7 +129,7 @@ function QuestionsEditorPage() {
           <ul>
             {q.choices.map((c) => (
               <li key={c.id}>
-                {c.choice_text} {c.is_correct ? "(correct answer)" : ""}
+                {c.text} {c.is_correct ? "(correct answer)" : ""}
               </li>
             ))}
           </ul>

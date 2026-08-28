@@ -88,7 +88,7 @@ function TakeExamPage() {
                 checked={answers[q.id] === c.id}
                 onChange={() => handleSelectChoice(q.id, c.id)}
               />{" "}
-              {c.choice_text}
+              {c.text}
             </label>
           ))}
         </div>
