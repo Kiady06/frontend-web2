@@ -34,7 +34,8 @@ function StudentsPage() {
     e.preventDefault();
     setError("");
     try {
-      await createStudent(email, password);
+      await createStudent(name, email, password);
+      setName("");
       setEmail("");
       setPassword("");
       loadStudents();
@@ -63,6 +64,7 @@ function StudentsPage() {
       <table>
         <thead>
           <tr>
+            <th>Name</th>
             <th>Email</th>
             <th>Status</th>
             <th>Action</th>
@@ -71,6 +73,7 @@ function StudentsPage() {
         <tbody>
           {students.map((s) => (
             <tr key={s.id}>
+              <td>{s.name}</td>
               <td>{s.email}</td>
               <td>{s.is_active ? "Active" : "Deactivated"}</td>
               <td>
