@@ -7,6 +7,7 @@ function CoursesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -30,7 +31,8 @@ function CoursesPage() {
     e.preventDefault();
     setError("");
     try {
-      await createCourse(name, description);
+      await createCourse(code, name, description);
+      setCode("");
       setName("");
       setDescription("");
       loadCourses();
@@ -60,6 +62,7 @@ function CoursesPage() {
       <table>
         <thead>
           <tr>
+            <th>Code</th>
             <th>Name</th>
             <th>Description</th>
             <th>Action</th>
@@ -68,6 +71,7 @@ function CoursesPage() {
         <tbody>
           {courses.map((c) => (
             <tr key={c.id}>
+              <td>{c.code}</td>
               <td>{c.name}</td>
               <td>{c.description}</td>
               <td>
@@ -82,6 +86,14 @@ function CoursesPage() {
 
       <h2>Create a Course</h2>
       <form onSubmit={handleCreate}>
+        <label>Course Code</label>
+        <input
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          required
+        />
+
         <label>Course Name</label>
         <input
           type="text"

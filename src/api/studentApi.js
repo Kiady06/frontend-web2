@@ -7,21 +7,23 @@ export function getStudents(){
         method: 'GET'
     });
 }
-export function createStudent(email, password) {
+export function createStudent(name, email, password) {
     return apiRequest({
         url: '/students',
         method: 'POST',
         data: {
+            name,
             email,
             password
         }
     });
 }
-export function updateStudent(id, email, password) {
+export function updateStudent(id, name, email, password) {
     return apiRequest({
         url: `/students/${id}`,
         method: 'PUT',
         data: {
+            name,
             email,
             password
         }

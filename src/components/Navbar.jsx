@@ -23,7 +23,6 @@ function Navbar() {
       <div className="navbar-left">
         <span className="navbar-brand">
           <span className="navbar-brand-dot" />
-          Portail Examens
         </span>
         <div className="navbar-links">
           {token && isAdmin && (
