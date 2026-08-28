@@ -26,7 +26,8 @@ export function deleteExam(id){
 }
 export function getExamResults(exam_id){
     return apiRequest(`/exams/${exam_id}/results`, 'GET');
-=======
+}
+
 export function getExams() {
   return apiRequest('/exams', 'GET');
 }
