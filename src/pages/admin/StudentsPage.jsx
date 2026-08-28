@@ -11,6 +11,7 @@ function StudentsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -93,6 +94,14 @@ function StudentsPage() {
 
       <h2>Create a Student Account</h2>
       <form onSubmit={handleCreate}>
+        <label>Name</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+
         <label>Email</label>
         <input
           type="email"

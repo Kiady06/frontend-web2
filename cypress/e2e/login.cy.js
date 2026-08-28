@@ -23,18 +23,26 @@ describe("Login page", () => {
   });
 
   it("logs in the admin and redirects to the dashboard", () => {
-    cy.intercept("POST", "*login*", {
+    cy.intercept("POST", "**/login*", {
       statusCode: 200,
       body: {
         token: "fake-jwt-token",
-        user: { id: 1, email: "admin@exam.com", isAdmin: true },
+        user: {
+          id: 1,
+          email: "admin@examhub.local",
+          isAdmin: true,
+          role: "admin",
+        },
+        isAdmin: true,
       },
     }).as("adminLogin");
 
-    cy.get('input[type="email"]').type("admin@exam.com");
-    cy.get('input[type="password"]').type("Admin123!");
+    cy.visit("/login");
+    cy.get('input[type="email"]').type("admin@examhub.local");
+    cy.get('input[type="password"]').type("admin123");
     cy.get('button[type="submit"]').click();
 
+    cy.wait("@adminLogin");
     cy.url().should("include", "/admin/dashboard");
   });
 });
