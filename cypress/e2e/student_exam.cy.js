@@ -4,9 +4,12 @@ describe("Student flow", () => {
       statusCode: 200,
       body: {
         token: "fake-jwt-token",
-        id: 2,
-        email: "jean.rakoto@examhub.local",
-        isAdmin: false,
+        user: {
+          id: 2,
+          name: "Jean Rakoto",
+          email: "jean.rakoto@examhub.local",
+          isAdmin: "student",
+        },
       },
     }).as("studentLogin");
 
@@ -74,8 +77,8 @@ describe("Student flow", () => {
             statement: "What does HTML stand for?",
             points: 2,
             choices: [
-              { id: 1, choice_text: "HyperText Markup Language" },
-              { id: 2, choice_text: "High Tech Modern Language" },
+              { id: 1, text: "HyperText Markup Language" },
+              { id: 2, text: "High Tech Modern Language" },
             ],
           },
         ],
@@ -96,8 +99,8 @@ describe("Student flow", () => {
             selected_choice_id: 1,
             correct_choice_id: 1,
             choices: [
-              { id: 1, choice_text: "HyperText Markup Language" },
-              { id: 2, choice_text: "High Tech Modern Language" },
+              { id: 1, text: "HyperText Markup Language" },
+              { id: 2, text: "High Tech Modern Language" },
             ],
           },
         ],
@@ -129,7 +132,7 @@ describe("Student flow", () => {
       body: [],
     }).as("noExams");
 
-    cy.visit("/student/exams"); 
+    cy.visit("/student/exams");
     cy.wait("@noExams");
     cy.contains("No exams available at the moment.").should("be.visible");
   });

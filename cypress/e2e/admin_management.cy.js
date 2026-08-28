@@ -4,9 +4,12 @@ describe("Admin flow", () => {
       statusCode: 200,
       body: {
         token: "fake-jwt-token",
-        id: 1,
-        email: "admin@examhub.local",
-        isAdmin: true,
+        user: {
+          id: 1,
+          name: "Admin",
+          email: "admin@examhub.local",
+          isAdmin: "admin",
+        },
       },
     }).as("adminLogin");
 
