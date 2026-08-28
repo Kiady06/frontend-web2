@@ -4,8 +4,8 @@ export function getCourses() {
   return apiRequest("/courses", "GET");
 }
 
-export function createCourse(name, description) {
-  return apiRequest("/courses", "POST", { name, description });
+export function createCourse(code, name, description) {
+  return apiRequest("/courses", "POST", { code, name, description });
 }
 
 export function updateCourse(id, name, description) {

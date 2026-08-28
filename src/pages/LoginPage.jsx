@@ -16,11 +16,11 @@ function LoginPage() {
       const data = await login(email, password);
 
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.id);
-      localStorage.setItem("isAdmin", data.isAdmin);
-      localStorage.setItem("email", data.email);
+      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("isAdmin", data.user.isAdmin === "admin");
+      localStorage.setItem("email", data.user.email);
 
-      if (data.isAdmin) {
+      if (data.user.isAdmin === "admin") {
         navigate("/admin/dashboard");
       } else {
         navigate("/student/exams");
