@@ -30,7 +30,7 @@ describe("Login page", () => {
         user: {
           id: 1,
           email: "admin@examhub.local",
-          isAdmin: true,
+          isAdmin: "admin",
           role: "admin",
         },
         isAdmin: true,
