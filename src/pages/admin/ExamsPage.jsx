@@ -39,7 +39,7 @@ function ExamsPage() {
     e.preventDefault();
     setError("");
     try {
-      await createExam(Number(courseId), name, startDate, endDate);
+      await createExam(Number(courseId), name, desc, startDate, endDate);
       setName("");
       setStartDate("");
       setEndDate("");
@@ -119,6 +119,13 @@ function ExamsPage() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
+        />
+
+        <label>Description</label>
+        <textarea
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
           required
         />
 
