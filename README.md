@@ -28,7 +28,7 @@ npm run dev
 ```
 
 The application is available at http://localhost:5173
-(the backend must be running on http://localhost:4000).
+(the backend must be running on http://localhost:3000).
 
 ## Cypress Tests
 
