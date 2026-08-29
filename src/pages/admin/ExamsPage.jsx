@@ -11,6 +11,7 @@ function ExamsPage() {
   const [error, setError] = useState("");
 
   const [courseId, setCourseId] = useState("");
+  const [desc, setDesc] = useState("");
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -41,6 +42,7 @@ function ExamsPage() {
     try {
       await createExam(Number(courseId), name, desc, startDate, endDate);
       setName("");
+      setDesc("");
       setStartDate("");
       setEndDate("");
       loadData();
