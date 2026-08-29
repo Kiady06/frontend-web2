@@ -6,8 +6,8 @@ export function getStudents(){
 export function createStudent(name, email, password) {
     return apiRequest("/students", "POST", { name, email, password });
 }
-export function updateStudent(id, name, email, password) {
-    return apiRequest(`/students/${id}`, "PUT", { name, email, password });
+export function updateStudent(id, name, email, is_active, password) {
+    return apiRequest(`/students/${id}`, "PUT", { name, email, is_active, password });
 }
 export function deactivateStudent(id) {
     return apiRequest(`/students/${id}`, "DELETE");

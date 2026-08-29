@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   getStudents,
   createStudent,
+  updateStudent,
   deactivateStudent,
 } from "../../api/studentApi";
 import Loader from "../../components/Loader.jsx";
@@ -14,6 +15,12 @@ function StudentsPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [editingId, setEditingId] = useState(null);
+  const [editName, setEditName] = useState("");
+  const [editEmail, setEditEmail] = useState("");
+  const [editIsActive, setEditIsActive] = useState(true);
+  const [editPassword, setEditPassword] = useState("");
 
   useEffect(() => {
     loadStudents();
@@ -55,6 +62,34 @@ function StudentsPage() {
     }
   }
 
+  function handleEdit(student) {
+    setEditingId(student.id);
+    setEditName(student.name);
+    setEditEmail(student.email);
+    setEditIsActive(student.is_active);
+    setEditPassword("");
+    setError("");
+  }
+
+  function handleCancelEdit() {
+    setEditingId(null);
+    setEditName("");
+    setEditEmail("");
+    setEditIsActive(true);
+    setEditPassword("");
+  }
+
+  async function handleSaveEdit(id) {
+    setError("");
+    try {
+      await updateStudent(id, editName, editEmail, editIsActive, editPassword || undefined);
+      handleCancelEdit();
+      loadStudents();
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
   if (loading) return <Loader />;
 
   return (
@@ -74,19 +109,62 @@ function StudentsPage() {
         <tbody>
           {students.map((s) => (
             <tr key={s.id}>
-              <td>{s.name}</td>
-              <td>{s.email}</td>
-              <td>{s.is_active ? "Active" : "Deactivated"}</td>
-              <td>
-                {s.is_active && (
-                  <button
-                    className="btn-danger"
-                    onClick={() => handleDeactivate(s.id)}
-                  >
-                    Deactivate
-                  </button>
-                )}
-              </td>
+              {editingId === s.id ? (
+                <>
+                  <td>
+                    <input
+                      type="text"
+                      value={editName}
+                      onChange={(e) => setEditName(e.target.value)}
+                      required
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="email"
+                      value={editEmail}
+                      onChange={(e) => setEditEmail(e.target.value)}
+                      required
+                    />
+                  </td>
+                  <td>
+                    <select
+                      value={editIsActive ? "true" : "false"}
+                      onChange={(e) => setEditIsActive(e.target.value === "true")}
+                    >
+                      <option value="true">Active</option>
+                      <option value="false">Deactivated</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      placeholder="New password (optional)"
+                      value={editPassword}
+                      onChange={(e) => setEditPassword(e.target.value)}
+                    />
+                    <button onClick={() => handleSaveEdit(s.id)}>Save</button>
+                    <button onClick={handleCancelEdit}>Cancel</button>
+                  </td>
+                </>
+              ) : (
+                <>
+                  <td>{s.name}</td>
+                  <td>{s.email}</td>
+                  <td>{s.is_active ? "Active" : "Deactivated"}</td>
+                  <td>
+                    <button onClick={() => handleEdit(s)}>Edit</button>
+                    {s.is_active && (
+                      <button
+                        className="btn-danger"
+                        onClick={() => handleDeactivate(s.id)}
+                      >
+                        Deactivate
+                      </button>
+                    )}
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>
